@@ -1,0 +1,11 @@
+# segredos
+.env
+secrets.toml
+.streamlit/secrets.toml
+
+# dados (ficam fora do repositório)
+*.csv
+*.xlsx
+propostas_extraidas.md
+data/
+__pycache__/
