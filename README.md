@@ -23,7 +23,7 @@ App Streamlit (Groq) que cruza executivos, meios, clientes e oportunidades.
 ## Publicar no Streamlit Community Cloud
 1. Acesse [share.streamlit.io](https://share.streamlit.io) e entre com o GitHub.
 2. **Create app** → *Deploy a public app from GitHub*:
-   - Repository: `Melissa-Etes/EPBOT_marketing` · Branch: `main`
+   - Repository: `giovanna0622/EPTV_CHATBOT` · Branch: `main`
    - Main file path: `eptv_app/app.py`
 3. Em **Advanced settings** → *Secrets*, cole:
    ```toml
