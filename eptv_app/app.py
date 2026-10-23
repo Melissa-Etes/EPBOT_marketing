@@ -193,15 +193,28 @@ def paginas(nome, conteudo):
 
 
 def extrair(mime, dados):
+    """Tenta cada leitor disponível em ordem; se um falhar (ex.: limite da Groq), passa para o próximo."""
+    ordem = [b for b, ok in (("groq", VISION_MODEL), ("claude", CLAUDE_KEY), ("ocr", TEM_OCR)) if ok]
+    erro = None
+    for b in ordem:
+        try:
+            return _extrair(b, mime, dados)
+        except Exception as e:
+            erro = e
+    raise erro
+
+
+def _extrair(backend, mime, dados):
     b64 = base64.b64encode(dados).decode()
-    if BACKEND == "groq":
+    if backend == "groq":
+        # limite gratuito da Groq para este modelo é 1000 tokens de saída por minuto
         r = client.chat.completions.create(
-            model=VISION_MODEL, temperature=0,
+            model=VISION_MODEL, temperature=0, max_tokens=900,
             messages=[{"role": "user", "content": [
-                {"type": "text", "text": EXTRACT_PROMPT},
+                {"type": "text", "text": EXTRACT_PROMPT + " Responda de forma compacta, sem texto fora do JSON."},
                 {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}}]}])
         return _json(r.choices[0].message.content)
-    if BACKEND == "claude":
+    if backend == "claude":
         import anthropic
         r = anthropic.Anthropic(api_key=CLAUDE_KEY).messages.create(
             model=CLAUDE_MODEL, max_tokens=3000,
