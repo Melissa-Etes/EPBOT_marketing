@@ -31,7 +31,8 @@ TITULOS = {
     "historico_propostas.csv": "Histórico de propostas",
 }
 PREFERIDOS = ["openai/gpt-oss-120b", "llama-3.3-70b-versatile", "qwen/qwen3-32b", "openai/gpt-oss-20b"]
-VISION_KEYS = ("vision", "llama-4", "scout", "maverick", "-vl", "pixtral")
+VISION_PREFERIDOS = ["qwen/qwen3.8-27b", "meta-models/muse-spark-open"]
+VISION_KEYS = ("vision", "llama-4", "scout", "maverick", "-vl", "pixtral", "qwen3.8", "muse-spark")
 CLAUDE_MODEL = "claude-sonnet-5-5"
 
 st.set_page_config(page_title="Oportunidades EPTV", page_icon="📺", layout="wide")
@@ -131,7 +132,9 @@ except Exception as e:
 MODEL = next((m for m in PREFERIDOS if m in DISPONIVEIS), None) or next(
     m for m in DISPONIVEIS if not any(k in m for k in ("whisper", "guard", "tts", "orpheus", "safeguard"))
 )
-VISION_MODEL = next((m for m in DISPONIVEIS if any(k in m.lower() for k in VISION_KEYS)), None)
+VISION_MODEL = next((m for m in VISION_PREFERIDOS if m in DISPONIVEIS), None) or next(
+    (m for m in DISPONIVEIS if any(k in m.lower() for k in VISION_KEYS)), None
+)
 CLAUDE_KEY = segredo("ANTHROPIC_API_KEY")
 TEM_OCR = shutil.which("tesseract") is not None
 BACKEND = "groq" if VISION_MODEL else ("claude" if CLAUDE_KEY else ("ocr" if TEM_OCR else None))
