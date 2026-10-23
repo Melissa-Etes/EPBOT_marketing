@@ -16,10 +16,20 @@ Cruzar as 4 bases para responder: **"para esta oportunidade, quais executivos de
 ### Regra de cruzamento (ordem de prioridade)
 
 1. **Filtro de meio**: só sugira a executivos que trabalham com o(s) meio(s) relevante(s) da oportunidade (se o documento indicar meio associado). Se não especificar meio, ignore este filtro.
-2. **Match de segmento cliente↔campo**: na carteira de cada executivo elegível, priorize clientes cujo segmento seja o mesmo (ou claramente relacionado) ao campo da oportunidade.
+2. **Match de segmento cliente↔campo**: na carteira de cada executivo elegível, classifique cada cliente em um nível de afinidade e sugira na ordem:
+   - **Direto** — o segmento do cliente é o mesmo campo da oportunidade.
+   - **Relacionado** — o segmento é diferente, mas o cliente tem motivo real para anunciar naquela oportunidade. Considere o tema e o nome da oportunidade, não só o rótulo do campo. Exemplos (não é lista fechada):
+     - Varejo / supermercado / ofertas ↔ Alimentação/Bebidas, Higiene e Beleza, Limpeza, Varejo, Shopping, Eletro
+     - Esporte ↔ Alimentação/Bebidas (cervejas, isotônicos), Apostas, Automotivo, Financeiro, Esporte/Moda esportiva, Saúde
+     - Agro ↔ Financeiro (cooperativas de crédito, bancos), Automotivo (máquinas, picapes), Alimentação
+     - Cultura / Entretenimento ↔ Alimentação/Bebidas, Financeiro, Telecom, Varejo
+     - Saúde ↔ Higiene e Beleza, Farmácia, Planos de saúde, Alimentação saudável
+     - Digital / streaming (ex.: Globoplay) ↔ qualquer anunciante de grande consumo; trate como relacionado a Varejo, Bebidas, Telecom e Financeiro
+   - **Sem match claro** — só quando nenhum cliente da carteira tiver relação razoável.
+   Não descarte um cliente só porque o rótulo do segmento é diferente: se houver relação plausível, sugira como **Relacionado** e explique a relação em uma linha (ex.: "Bebidas vendem em supermercado — combina com ação de ofertas"). Sempre deixe claro na justificativa se o match é direto ou relacionado.
 3. **Desempate (versão provisória)**: quando o segmento do cliente não estiver explícito, ou houver empate:
    - Prefira clientes que já tiveram propostas no MESMO campo/segmento (se esse histórico estiver nos dados).
-   - Sem histórico, liste todos os clientes elegíveis do executivo sem ranquear e avise que não há dado suficiente para desempate automático.
+   - Sem histórico, ordene por nível de afinidade (direto antes de relacionado) e avise que não há histórico para desempate.
    - **Nunca invente score de probabilidade nem afirme que um cliente é "o melhor" sem dado que sustente.** Isto é heurística manual, não pontuação estatística.
 
 ### Quando houver um score
